@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Яндекс.Карты Продвижение - Увеличим количество звонков и маршрутов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базовые стили и переменные */
+        :root {
+            --primary: #2d6ae3;
+            --primary-dark: #1a56d6;
+            --secondary: #ff3366;
+            --secondary-dark: #e62958;
+            --accent: #00e5ff;
+            --dark: #121826;
+            --darker: #0a0e17;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-dark: #343a40;
+            --success: #00cc88;
+            --warning: #ffaa00;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --shadow-neon: 0 0 15px rgba(45, 106, 227, 0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--light);
+            background-color: var(--darker);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #d1d5db;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #00b8d4);
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(45, 106, 227, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(45, 106, 227, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(45, 106, 227, 0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 5px var(--accent);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent);
+            }
+        }
+        
+        .animated {
+            opacity: 0;
+            animation-fill-mode: both;
+        }
+        
+        .fadeInUp {
+            animation-name: fadeInUp;
+            animation-duration: 1s;
+        }
+        
+        .fadeInLeft {
+            animation-name: fadeInLeft;
+            animation-duration: 1s;
+        }
+        
+        .fadeInRight {
+            animation-name: fadeInRight;
+            animation-duration: 1s;
+        }
+        
+        /* Шапка */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(45, 106, 227, 0.2);
+        }
+        
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+            animation: glow 3s infinite;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Главный экран */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom right, var(--darker), #0f1525);
+            padding-top: 100px;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: var(--primary);
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s 0.2s both;
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s 0.4s both;
+        }
+        
+        .hero .btn {
+            animation: fadeInUp 1s 0.6s both;
+            animation: pulse 2s infinite 1s;
+        }
+        
+        /* Карточки проблем */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .problem-card {
+            background-color: rgba(26, 30, 44, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(45, 106, 227, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--warning));
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: rgba(45, 106, 227, 0.3);
+        }
+        
+        .problem-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        /* Философия и схема */
+        .philosophy-scheme {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .scheme-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 30px 20px;
+            background-color: rgba(26, 30, 44, 0.8);
+            border-radius: 15px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .scheme-step:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .step-connector {
+            position: absolute;
+            top: 25px;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary);
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .step-connector {
+                display: block;
+            }
+        }
+        
+        /* Методология */
+        .methodology-steps {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+        
+        .method-step {
+            display: flex;
+            margin-bottom: 40px;
+            background-color: rgba(26, 30, 44, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(45, 106, 227, 0.1);
+            transition: var(--transition);
+        }
+        
+        .method-step:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .step-number-large {
+            min-width: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .step-content {
+            padding: 30px;
+            flex: 1;
+        }
+        
+        .step-content h3 {
+            margin-top: 0;
+        }
+        
+        /* Кейсы */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .case-card {
+            background-color: rgba(26, 30, 44, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(45, 106, 227, 0.1);
+        }
+        
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .case-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(45, 106, 227, 0.1);
+            border-radius: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #d1d5db;
+        }
+        
+        /* Тарифы */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .pricing-card {
+            background-color: rgba(26, 30, 44, 0.8);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(45, 106, 227, 0.1);
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-neon);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #d1d5db;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .features-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .features-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+        
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            background-color: rgba(26, 30, 44, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(45, 106, 227, 0.1);
+        }
+        
+        .faq-question {
+            padding: 20px 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+        }
+        
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 30px 30px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* Форма */
+        .contact-form {
+            max-width: 600px;
+            margin: 50px auto 0;
+            background-color: rgba(26, 30, 44, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(45, 106, 227, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 106, 227, 0.2);
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: rgba(10, 14, 23, 0.95);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(45, 106, 227, 0.2);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-links-column h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links-column ul {
+            list-style: none;
+        }
+        
+        .footer-links-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links-column a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(45, 106, 227, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #d1d5db;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 14, 23, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .philosophy-scheme {
+                flex-direction: column;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 14px 28px;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Эффекты для скролла */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent);
+            font-size: 2rem;
+            animation: float 2s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* Индикатор прогресса прокрутки */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Индикатор прогресса прокрутки -->
+    <div class="progress-bar"></div>
+    
+    <!-- Шапка -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-map-marked-alt"></i>Карта<span>Про</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#problems">Проблемы</a></li>
+                <li><a href="#philosophy">Философия</a></li>
+                <li><a href="#methodology">Методология</a></li>
+                <li><a href="#cases">Кейсы</a></li>
+                <li><a href="#pricing">Тарифы</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact" class="btn btn-secondary">Получить аудит</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- Главный экран -->
+    <section class="hero" id="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1>Увеличим количество звонков и маршрутов с Яндекс.Карт уже в первые 30 дней работы</h1>
+                <h2>Превращаем карточку организации в канал продаж без затрат на рекламу. Наш результат: рост органического трафика в 2 раза и +87% построенных маршрутов за первый месяц (кейс в нише с 10 конкурентами).</h2>
+                <a href="#contact" class="btn">Получить бесплатный аудит для моего бизнеса</a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator" id="scrollIndicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+    
+    <!-- Проблемы -->
+    <section id="problems">
+        <div class="container">
+            <h2 class="section-title">Вы теряете деньги, если ваша карточка не работает</h2>
+            
+            <div class="problems-grid">
+                <div class="problem-card animated fadeInLeft">
+                    <i class="fas fa-images"></i>
+                    <h3>Фотографии не вызывают доверия</h3>
+                    <p>Клиенты видят стоковые или некачественные фото, принимают вас за фейк или «забегаловку» и уходят к конкурентам за 3 секунды.</p>
+                </div>
+                
+                <div class="problem-card animated fadeInUp">
+                    <i class="fas fa-star-half-alt"></i>
+                    <h3>Низкий рейтинг отпугивает</h3>
+                    <p>Если у вас мало отзывов или рейтинг ниже 4.7, клиенты сомневаются в качестве услуг и боятся звонить, выбирая тех, кто выглядит надежнее.</p>
+                </div>
+                
+                <div class="problem-card animated fadeInRight">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Слив денег на рекламу</h3>
+                    <p>Запускать продвижение на пустую карточку — это сжигание бюджета. Клиенты кликают, не находят причин купить и уходят. Вы платите за клик, а заказ получает конкурент.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Философия -->
+    <section id="philosophy" style="background-color: rgba(18, 24, 38, 0.7);">
+        <div class="container">
+            <h2 class="section-title">Перестаньте относиться к Картам как к справочнику. Это ваша главная воронка продаж</h2>
+            
+            <div class="philosophy-scheme">
+                <div class="scheme-step animated fadeInUp" style="animation-delay: 0.1s">
+                    <div class="step-number">1</div>
+                    <h3>Показ</h3>
+                    <p>Клиент ищет услугу → Мы перехватываем внимание меткой.</p>
+                </div>
+                <div class="step-connector"></div>
+                
+                <div class="scheme-step animated fadeInUp" style="animation-delay: 0.2s">
+                    <div class="step-number">2</div>
+                    <h3>Клик</h3>
+                    <p>Клиент выбирает → Мы выигрываем за счет рейтинга и витрины.</p>
+                </div>
+                <div class="step-connector"></div>
+                
+                <div class="scheme-step animated fadeInUp" style="animation-delay: 0.3s">
+                    <div class="step-number">3</div>
+                    <h3>Доверие</h3>
+                    <p>Клиент сомневается → Мы закрываем возражения через фото и ответы на отзывы.</p>
+                </div>
+                <div class="step-connector"></div>
+                
+                <div class="scheme-step animated fadeInUp" style="animation-delay: 0.4s">
+                    <div class="step-number">4</div>
+                    <h3>Действие</h3>
+                    <p>Клиент готов → Мы ведем его в навигатор или звонок.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Методология -->
+    <section id="methodology">
+        <div class="container">
+            <h2 class="section-title">Работаем не наугад, а по алгоритмам поисковых роботов</h2>
+            
+            <div class="methodology-steps">
+                <div class="method-step animated fadeInLeft">
+                    <div class="step-number-large">1</div>
+                    <div class="step-content">
+                        <h3>Глубокая семантика</h3>
+                        <p>Не просто пишем категории, а собираем ТОП целевых поисковых запросов в вашей нише. Клиенты будут находить вас не только по названию, но и по конкретным услугам (например, «замена масла», «маникюр френч»).</p>
+                    </div>
+                </div>
+                
+                <div class="method-step animated fadeInRight">
+                    <div class="step-number-large">2</div>
+                    <div class="step-content">
+                        <h3>Инженерная работа с визуалом <span style="color: var(--accent);">🛠️ (УТП)</span></h3>
+                        <p>Мы не просто загружаем красивые фото. Используем собственное разработанное ПО, которое прописывает метаданные (гео-координаты и ключевые слова) внутрь кода каждой фотографии. Роботы Яндекса считывают фото не как картинку, а как сигнал релевантности для конкретного района.</p>
+                    </div>
+                </div>
+                
+                <div class="method-step animated fadeInLeft">
+                    <div class="step-number-large">3</div>
+                    <div class="step-content">
+                        <h3>SEO-копирайтинг</h3>
+                        <p>Заполняем профиль текстами, насыщенными LSI-ключами. Превращаем прайс-лист и раздел «Новости» в источники дополнительного трафика.</p>
+                    </div>
+                </div>
+                
+                <div class="method-step animated fadeInRight">
+                    <div class="step-number-large">4</div>
+                    <div class="step-content">
+                        <h3>Управление репутацией <span style="color: var(--accent);">⭐</span></h3>
+                        <p>Берем на себя работу с отзывами. Отвечаем на каждый комментарий, используя ключевые слова, чтобы перекрыть негатив, поднять рейтинг доверия до 4.8+ и улучшить выдачу организации.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Кейсы -->
+    <section id="cases" style="background-color: rgba(18, 24, 38, 0.7);">
+        <div class="container">
+            <h2 class="section-title">Результаты говорят громче, чем реклама</h2>
+            
+            <div class="cases-grid">
+                <div class="case-card animated fadeInLeft">
+                    <h3>Кейс №1. Автосервис (Пенза)</h3>
+                    <p><strong>Задача:</strong> Выжить в локации с 10 конкурентами в радиусе 1 км.</p>
+                    <p><strong>Точка А:</strong> Рейтинг 4.5, 8-е место в выдаче, 16 маршрутов.</p>
+                    <p><strong>Точка Б (за 30 дней):</strong></p>
+                    
+                    <div class="case-stats">
+                        <div class="stat">
+                            <div class="stat-value">x2</div>
+                            <div class="stat-label">Рост органики</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">87%</div>
+                            <div class="stat-label">Рост маршрутов</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5-е</div>
+                            <div class="stat-label">Новая позиция</div>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Итог:</strong> Поднялись на 5-е место без покупки рекламы.</p>
+                </div>
+                
+                <div class="case-card animated fadeInRight">
+                    <h3>Кейс №2. Студия маникюра Lynx</h3>
+                    <p><strong>Задача:</strong> Быстрый старт новой точки и захват топа.</p>
+                    <p><strong>Точка А:</strong> 52-я позиция, слабая видимость.</p>
+                    <p><strong>Точка Б (за 37 дней):</strong></p>
+                    
+                    <div class="case-stats">
+                        <div class="stat">
+                            <div class="stat-value">108%</div>
+                            <div class="stat-label">Рост просмотров</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">+43</div>
+                            <div class="stat-label">Позиции вверх</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">ТОП-10</div>
+                            <div class="stat-label">Вход в ТОП</div>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Итог:</strong> Взлет на +43 позиции вверх (вход в ТОП-10). Рост конверсии из просмотра в открытие карточки.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#contact" class="btn btn-secondary">Хочу такой же разбор для моего бизнеса</a>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: #9ca3af;">Это бесплатно и ни к чему вас не обязывает</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Тарифы -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title">Выберите скорость роста вашей точки</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Мы не продаем «процесс», мы продаем скорость результата</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card animated fadeInLeft">
+                    <h3>«Легкий старт» (Тест-драйв)</h3>
+                    <p>Идеально для старта. Наводим порядок в Яндексе, чтобы перестать терять клиентов.</p>
+                    
+                    <div class="price">25.000 <span>₽</span></div>
+                    <p><strong>Срок:</strong> 1 месяц</p>
+                    <p><strong>Платформа:</strong> Только Яндекс.Карты</p>
+                    
+                    <ul class="features-list">
+                        <li>Техническая упаковка</li>
+                        <li>Базовый визуал</li>
+                        <li>SEO-оптимизация</li>
+                        <li>Поддержка активности</li>
+                        <li>Работа с отзывами</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn" style="width: 100%; text-align: center;">Выбрать тариф</a>
+                </div>
+                
+                <div class="pricing-card popular animated fadeInUp">
+                    <div class="popular-badge">ХИТ ПРОДАЖ</div>
+                    <h3>«Захват района»</h3>
+                    <p>Золотая середина. Подключаем технологию Metadata и стратегию на 3 месяца.</p>
+                    
+                    <div class="price">90.000 <span>₽</span></div>
+                    <p><strong>Срок:</strong> 3 месяца (Квартал)</p>
+                    <p><strong>Платформы:</strong> Яндекс + БОНУС: 2ГИС / Google</p>
+                    
+                    <ul class="features-list">
+                        <li>Дизайн профиля</li>
+                        <li>Технология Metadata</li>
+                        <li>Расширенная активность</li>
+                        <li>SEO-репутация</li>
+                        <li>Аналитика</li>
+                        <li>Всё, что в «Легком старте»</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn btn-accent" style="width: 100%; text-align: center;">Выбрать тариф</a>
+                </div>
+                
+                <div class="pricing-card animated fadeInRight">
+                    <h3>«Тотальное доминирование» (VIP)</h3>
+                    <p>Максимальная скорость. Для тех, кто хочет выдавить конкурентов и забрать весь трафик.</p>
+                    
+                    <div class="price">120.000 <span>₽</span></div>
+                    <p><strong>Срок:</strong> 3 месяца (Квартал)</p>
+                    <p><strong>Платформы:</strong> Яндекс + БОНУС: 2ГИС и Google (Полный пакет)</p>
+                    
+                    <ul class="features-list">
+                        <li>Премиум-дизайн</li>
+                        <li>Агрессивный постинг</li>
+                        <li>Глубокое SEO</li>
+                        <li>Работа с негативом</li>
+                        <li>VIP поддержка</li>
+                        <li>Всё, что в «Захвате района»</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn" style="width: 100%; text-align: center;">Выбрать тариф</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#contact" class="btn">Обсудить условия и выбрать тариф</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section id="faq" style="background-color: rgba(18, 24, 38, 0.7);">
+        <div class="container">
+            <h2 class="section-title">Ответы на вопросы</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Почему минимум 3 месяца?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Алгоритмы Яндекса инертны. Первый месяц мы «будим» карточку, второй — накапливаем поведенческие факторы (клики, маршруты), третий — закрепляем позицию. За 30 дней можно получить всплеск, но чтобы остаться в топе, нужна система.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>У меня уже есть Яндекс.Директ, зачем мне это?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Директ приводит трафик, но не конвертирует его. Если карточка пустая или с плохим рейтингом, вы платите за клики, которые не становятся звонками. Мы делаем так, чтобы ваша реклама окупалась в 2-3 раза лучше.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Вы гарантируете 1-е место?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Честно? Нет. Если кто-то гарантирует вам 1-е место в Яндексе — это мошенники. Позиция зависит от десятков факторов, включая расстояние до пользователя. Мы гарантируем рост видимости, трафика и конверсии, что важнее красивой цифры места.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Что будет, если я перестану платить?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Карточка останется вашей. Всё оформление, фото и рейтинг сохранятся. Но без регулярной активности (новости, ответы, обновление фото) алгоритмы со временем начнут понижать вас в выдаче в пользу более активных конкурентов.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Форма и подвал -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Не дарите своих клиентов конкурентам. Начните перехват спроса сегодня</h2>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Ваше Имя</label>
+                        <input type="text" id="name" class="form-control" placeholder="Иван Иванов" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="+7 (999) 123-45-67" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="link">Ссылка на карточку (необязательно)</label>
+                        <input type="url" id="link" class="form-control" placeholder="https://yandex.ru/maps/org/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn" style="width: 100%;">Получить аудит</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="#" class="footer-logo">
+                        <i class="fas fa-map-marked-alt"></i>Карта<span>Про</span>
+                    </a>
+                    <p>Превращаем карточку организации в канал продаж без затрат на рекламу.</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fas fa-phone"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h4>Навигация</h4>
+                        <ul>
+                            <li><a href="#problems">Проблемы</a></li>
+                            <li><a href="#philosophy">Философия</a></li>
+                            <li><a href="#methodology">Методология</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-column">
+                        <h4>Услуги</h4>
+                        <ul>
+                            <li><a href="#cases">Кейсы</a></li>
+                            <li><a href="#pricing">Тарифы</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-column">
+                        <h4>Контакты</h4>
+                        <ul>
+                            <li>Телефон: +7 (999) 123-45-67</li>
+                            <li>Telegram: @kartapro_ru</li>
+                            <li>WhatsApp: +7 (999) 123-45-67</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 КартаПро. Все права защищены.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Закрытие меню при клике на ссылку
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Плавная прокрутка для всех ссылок с якорями
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // FAQ аккордеон
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Анимация при прокрутке
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            function checkScroll() {
+                animatedElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.animationPlayState = 'running';
+                    }
+                });
+            }
+            
+            // Проверяем при загрузке и при прокрутке
+            checkScroll();
+            window.addEventListener('scroll', checkScroll);
+            
+            // Индикатор прогресса прокрутки
+            const progressBar = document.querySelector('.progress-bar');
+            
+            window.addEventListener('scroll', function() {
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (window.scrollY / windowHeight) * 100;
+                progressBar.style.width = scrolled + '%';
+                
+                // Добавляем/удаляем класс для шапки при прокрутке
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Создаем частицы для фона главного экрана
+            const heroBg = document.getElementById('heroBg');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Случайные размеры и позиции
+                const size = Math.random() * 10 + 5;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                // Разные цвета частиц
+                const colors = ['#2d6ae3', '#00e5ff', '#ff3366', '#00cc88'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                
+                // Добавляем анимацию плавания
+                particle.style.animation = `float ${Math.random() * 10 + 10}s infinite ease-in-out`;
+                
+                heroBg.appendChild(particle);
+            }
+            
+            // Анимация цифр в кейсах
+            function animateNumbers() {
+                const stats = document.querySelectorAll('.stat-value');
+                
+                stats.forEach(stat => {
+                    const value = stat.textContent;
+                    let targetValue;
+                    
+                    if (value.includes('x')) {
+                        targetValue = parseFloat(value.replace('x', ''));
+                    } else if (value.includes('%')) {
+                        targetValue = parseFloat(value.replace('%', ''));
+                    } else if (value.includes('+')) {
+                        targetValue = parseFloat(value.replace('+', ''));
+                    } else {
+                        targetValue = parseFloat(value);
+                    }
+                    
+                    if (!isNaN(targetValue)) {
+                        let currentValue = 0;
+                        const increment = targetValue / 50;
+                        const timer = setInterval(() => {
+                            currentValue += increment;
+                            
+                            if (currentValue >= targetValue) {
+                                currentValue = targetValue;
+                                clearInterval(timer);
+                            }
+                            
+                            if (value.includes('x')) {
+                                stat.textContent = 'x' + currentValue.toFixed(1);
+                            } else if (value.includes('%')) {
+                                stat.textContent = Math.floor(currentValue) + '%';
+                            } else if (value.includes('+')) {
+                                stat.textContent = '+' + Math.floor(currentValue);
+                            } else {
+                                stat.textContent = Math.floor(currentValue);
+                            }
+                        }, 30);
+                    }
+                });
+            }
+            
+            // Запускаем анимацию цифр при попадании блока кейсов в область видимости
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateNumbers();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const casesSection = document.getElementById('cases');
+            if (casesSection) {
+                observer.observe(casesSection);
+            }
+            
+            // Обработка формы
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Простая имитация отправки
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    
+                    submitBtn.textContent = 'Отправляем...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
+                        contactForm.reset();
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 1500);
+                });
+            }
+            
+            // Анимация скролл-индикатора
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: window.innerHeight,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                // Скрываем индикатор при прокрутке вниз
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 200) {
+                        scrollIndicator.style.opacity = '0';
+                        scrollIndicator.style.pointerEvents = 'none';
+                    } else {
+                        scrollIndicator.style.opacity = '1';
+                        scrollIndicator.style.pointerEvents = 'auto';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
